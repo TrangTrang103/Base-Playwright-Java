@@ -1,19 +1,18 @@
 package com.automation.playwright.browser;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Base64;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.automation.playwright.config.Config;
-import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserContext;
-import com.microsoft.playwright.BrowserType;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
-import com.microsoft.playwright.Tracing;
-import com.microsoft.playwright.Video;
+import com.automation.playwright.report.HtmlReportListener;
+import com.microsoft.playwright.*;
 import com.microsoft.playwright.assertions.PlaywrightAssertions;
+import org.testng.ITestResult;
 
 /**
  * Owns the Playwright objects of each test thread.
@@ -221,5 +220,17 @@ public final class BrowserManager {
             case "webkit", "safari" -> playwright.webkit();
             default -> throw new IllegalArgumentException("Unsupported browser '" + name + "' (use chromium, firefox or webkit)");
         };
+    }
+
+    private void attachScreenshot(ITestResult result, String fileName) {
+        try {
+            byte[] png = page().screenshot(new Page.ScreenshotOptions().setFullPage(true));
+            result.setAttribute(HtmlReportListener.SCREENSHOT, Base64.getEncoder().encodeToString(png));
+            Path file = BrowserManager.ARTIFACT_DIR.resolve(fileName + "-screenshot.png");
+            Files.createDirectories(file.getParent());
+            Files.write(file, png);
+        } catch (PlaywrightException | IOException e) {
+            System.err.println("Could not take a screenshot of " + result.getName() + ": " + e.getMessage());
+        }
     }
 }

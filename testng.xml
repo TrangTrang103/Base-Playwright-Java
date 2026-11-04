@@ -17,7 +17,7 @@
             </run>
         </groups>
         <packages>
-            <package name="com.automation.playwright.tests.*" />
+            <package name="com.automation.playwright.test.*" />
         </packages>
     </test>
 </suite>

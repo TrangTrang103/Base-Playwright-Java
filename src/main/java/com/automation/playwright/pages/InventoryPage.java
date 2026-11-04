@@ -8,7 +8,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public class InventoryPage extends ShopPage {
 //    public Page page;
     private static final String URL_HomePage = "/inventory.html";
-    private final Locator items = page.getByTestId("Inventory-item");
+    private final Locator items = page.getByTestId("inventory-item");
 
 //    public InventoryTest(LoginPage loginPage) {
 //        this.loginPage = loginPage;

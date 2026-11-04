@@ -20,7 +20,7 @@ public class TestData {
                 {"wrong user", "leuleu", "secret_sauce", NO_MATCH},
                 {"password, user is blank","","",BLANK},
                 {"User is Blank", "", "secret_sauce", USER_BLANK },
-                {"Password is Blank", "STANDARD_USER", "", PASSWORD_BLANK }
+                {"Password is Blank", STANDARD_USER, "", PASSWORD_BLANK }
         };
     }
 }
