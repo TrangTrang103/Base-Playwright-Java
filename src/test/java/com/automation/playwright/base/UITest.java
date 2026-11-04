@@ -1,12 +1,9 @@
 package com.automation.playwright.base;
 
 import com.automation.playwright.browser.BrowserManager;
-import com.automation.playwright.pages.ui.LoginPage;
+import com.automation.playwright.pages.InventoryPage;
+import com.automation.playwright.pages.LoginPage;
 import com.microsoft.playwright.Page;
-
-import java.security.PublicKey;
-
-import static com.automation.playwright.browser.BrowserManager.page;
 
 public abstract class UITest extends PlaywrightTest {
 
@@ -21,6 +18,10 @@ public abstract class UITest extends PlaywrightTest {
      */
     protected LoginPage openLoginPage() {
         return new LoginPage(page()).openPage();
+    }
+
+    protected InventoryPage inventoryPage(String user){
+        return openLoginPage().loginAs(user);
     }
 
 }
