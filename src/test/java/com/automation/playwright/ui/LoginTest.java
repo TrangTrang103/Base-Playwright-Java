@@ -16,12 +16,21 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public class LoginTest extends UITest {
 
 
-   @Test(groups = "smoke")
+   @Test(groups = "smoke", description = "Login success")
    public void loginSuccess(){
       InventoryPage inventoryPage = openLoginPage().loginAs(TestData.STANDARD_USER);
        assertThat(inventoryPage.page()).hasURL(Pattern.compile(".*/inventory\\.html"));
        assertThat(inventoryPage.title()).hasText("Products");
        assertThat(inventoryPage.items()).hasCount(6);
+   }
+
+
+   @Test(groups = "smoke", description = "Logout success")
+   public void logoutSuccess(){
+      LoginPage logoutSuccess = openLoginPage().loginAs(TestData.STANDARD_USER).logout();
+      assertThat(logoutSuccess.loginButton()).isVisible();
+      assertThat(logoutSuccess.page()).not().hasURL(Pattern.compile(".*/inventory\\.html"));
+
    }
 
    /* Case Nagative Login */

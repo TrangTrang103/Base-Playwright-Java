@@ -12,6 +12,9 @@ public class LoginPage extends BasePage {
     private Locator loginButton = page.getByTestId("login-button");
 
     private Locator error = page.getByTestId("error");
+
+
+
     public LoginPage(Page page) {
         super(page);
     }
@@ -50,7 +53,7 @@ public class LoginPage extends BasePage {
         return this;
     }
     public Locator error(){
-        Steps.log("Msg error");
+        Steps.log("Msg error: " + error.innerText());
         return error;
     }
     public Locator loginButton(){
