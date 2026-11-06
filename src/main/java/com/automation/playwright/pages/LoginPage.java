@@ -47,6 +47,17 @@ public class LoginPage extends BasePage {
         return inventoryPage;
 
     }
+
+    public LoginPage loginWithKeyBoard(String user, String secret){
+        Steps.log("Log in as \"" + user + "\" with the keyboard (Tab, Enter)");
+        userName.fill(user);
+        page.keyboard().press("Tab");
+        password.fill(secret);
+        page.keyboard().press("Tab");
+        page.keyboard().press("Enter");
+        return this;
+
+    }
     public LoginPage openPage(){
         Steps.log("Open the login page");
         page.navigate("/");
@@ -57,7 +68,12 @@ public class LoginPage extends BasePage {
         return error;
     }
     public Locator loginButton(){
-        Steps.log("Login Button");
+        //Steps.log("Login Button");
         return loginButton;
+    }
+
+    public LoginPage tryOnAPI(){
+        page.navigate("/inventory.html");
+        return this;
     }
 }
